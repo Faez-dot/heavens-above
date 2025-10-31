@@ -4,9 +4,11 @@
   "private": true,
   "description": "Scripts for scraping the Heavens Above website.",
   "main": "run.js",
-  "scripts": {
+   "scripts": {
     "start": "node run.js",
-    "build": "echo 'No build step required'"
+    "lint": "eslint .",
+    "build": "echo 'No build step defined'",
+    "docs:build": "node scripts/generateDocs.js"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
