@@ -1,4 +1,4 @@
-name: Deployment
+name: Deployment to Vercel
 
 on:
   push:
@@ -9,23 +9,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: Build App
+      - name: Build project
         run: npm run build
 
-      - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v4.1.8
-        with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: your-heroku-app-name
-          heroku_email: your-email@example.com
+      - name: Deploy to Vercel
+        run: npx vercel --prod --token=${{ secrets.VERCEL_TOKEN }} --confirm --scope ${{ secrets.VERCEL_ORG_ID }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
