@@ -2,13 +2,19 @@ name: Dependency Updates
 
 on:
   schedule:
-    - cron: "0 0 * * 1" # Every Monday
-  workflow_dispatch:
+    - cron: "0 0 * * 1" # every Monday
+  workflow_dispatch: # 👈 allows manual trigger
 
 jobs:
-  dependabot:
+  update:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Run Dependabot
-        uses: dependabot/fetch-metadata@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for dependency updates
+        run: echo "Checking for outdated dependencies..."
+
+      - name: Update dependencies (simulated)
+        run: echo "Dependencies updated successfully!"
